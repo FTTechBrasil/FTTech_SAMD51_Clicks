@@ -1,0 +1,67 @@
+###############################################
+# Syntax Coloring Map For FTTech_SAMD51_Clicks
+###############################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+FTClicks    KEYWORD1
+FTTech_SAMD51Clicks	KEYWORD1
+MAX31875    KEYWORD1
+FTTech_SAMD51_MAX31875  KEYWORD1
+
+ArduinoModbus	KEYWORD1
+ModbusRTUClient	KEYWORD1
+ModbusRTUServer	KEYWORD1
+ModbusTCPClient	KEYWORD1
+ModbusTCPServer	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+turnON	KEYWORD2
+turnOFF	KEYWORD2
+turnON_5V	KEYWORD2
+turnOFF_5V	KEYWORD2
+turnON_SPI_CS	KEYWORD2
+turnOFF_SPI_CS	KEYWORD2
+sleepForSeconds	KEYWORD2
+sleepWithComunication	KEYWORD2
+readLipoBattery	KEYWORD2
+readLeadAcidBattery	KEYWORD2
+readCelsius KEYWORD2
+
+poll	KEYWORD2
+end	KEYWORD2
+beginTransmission	KEYWORD2
+write	KEYWORD2
+endTransmission	KEYWORD2
+requestFrom	KEYWORD2
+available	KEYWORD2
+read	KEYWORD2
+coilRead	KEYWORD2
+discreteInputRead	KEYWORD2
+holdingRegisterRead	KEYWORD2
+inputRegisterRead	KEYWORD2
+coilWrite	KEYWORD2
+holdingRegisterWrite	KEYWORD2
+registerMaskWrite	KEYWORD2
+lastError	KEYWORD2
+configureCoils	KEYWORD2
+configureDiscreteInputs	KEYWORD2
+configureHoldingRegisters	KEYWORD2
+configureInputRegisters	KEYWORD2
+discreteInputWrite	KEYWORD2
+inputRegisterWrite	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+COILS	LITERAL1
+DISCRETE_INPUTS	LITERAL1
+HOLIDING_REGISTERS	LITERAL1
+INPUT_REGISTERS	LITERAL1
