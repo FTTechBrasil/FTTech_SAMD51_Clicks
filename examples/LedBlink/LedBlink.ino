@@ -33,7 +33,7 @@
 */
 
 // Libraries
-#include "FTTech_SAMD51_Clicks.h"
+#include "FTTech_SAMD51Clicks.h"
 
 // Set the time for LED to stay ON and OFF in milliseconds
 #define   TIME_ON   2000

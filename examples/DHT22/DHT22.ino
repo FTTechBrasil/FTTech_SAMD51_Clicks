@@ -33,7 +33,7 @@
 
 //Libraries
 #include <DHT.h>
-#include "FTTech_SAMD51_Clicks.h"
+#include "FTTech_SAMD51Clicks.h"
 
 #define DHTPIN 5      // Digital pin used by DHT22
 #define DHTTYPE DHT22 // Define the sensor model (DHT22 / AM2302)

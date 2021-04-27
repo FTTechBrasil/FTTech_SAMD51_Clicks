@@ -1,8 +1,9 @@
 #ifndef _FTTECH_SAMD51_MAX31875_H_
 #define _FTTECH_SAMD51_MAX31875_H_
 
-#include <Arduino.h>
+#include "FTTech_Debug.h"
 
+#include <Arduino.h>
 
 /**************************************************************************/
 /*!
@@ -26,6 +27,8 @@ class FTTech_SAMD51_MAX31875 {
 
 
   private:
+    bool initialized = false;
+
     // Slave and Register Addresses
     const uint8_t maxAddress = 0x48;          // (Datasheet) Table 1. I2C Slave Addresses
     const uint8_t tempRegAddress = 0x00;      // (Datasheet) Table 2. Register Functions and POR States
@@ -46,7 +49,11 @@ class FTTech_SAMD51_MAX31875 {
     /*!
       @brief This function send configuration setup to MAX sensor according to configReg
     */
-    void configTemp(void);
+    uint8_t configTemp(void);
+    
+    uint8_t write(uint8_t var);
+
+    uint8_t  checkInitialize(void);
 
 };
 

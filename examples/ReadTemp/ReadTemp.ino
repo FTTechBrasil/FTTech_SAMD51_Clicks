@@ -35,7 +35,7 @@
 
 // Import library for I2C interface
 #include <Wire.h>
-#include "FTTech_SAMD51_Clicks.h"
+#include "FTTech_SAMD51Clicks.h"
 
 const uint32_t baud = 9600;               // Baudrate that will be used beetween FTClicks and Serial Monitor
 

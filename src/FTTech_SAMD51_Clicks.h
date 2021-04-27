@@ -1,10 +1,12 @@
 #ifndef _FTTECH_SAMD51CLICKS_H_
 #define _FTTECH_SAMD51CLICKS_H_
 
+#include "FTTech_Debug.h"
+
 #include <Arduino.h>
 #include <Adafruit_SleepyDog.h>
 #include <MAX31875/MAX31875.h>
-#include <ArduinoModbus/ArduinoModbus.h>
+
 
 /**************************************************************************/
 /*!
@@ -12,6 +14,10 @@
    FTTech SAMD51 Clicks hardware
 */
 /**************************************************************************/
+
+#define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
+
+#define FTTECH_VERSION "1.0.0"
 
 class FTTech_SAMD51Clicks {
   public:
@@ -21,7 +27,7 @@ class FTTech_SAMD51Clicks {
     /*!  
       @brief set to OFF all Click's power and get SAMD51 unique id. 
     */
-    bool begin(bool debug = false);
+    bool begin();
 
     /*!
       @brief set the specific click power to ON. Enable 3.3V
@@ -107,13 +113,33 @@ class FTTech_SAMD51Clicks {
     float readLeadAcidBattery(void);
 
 
+    void printBanner() {
+      LOG1_FTTECH_PRINTLN(F(
+        " ______   ______   ______   ______     ______     __  __" FTTECH_NEWLINE    
+        "/\\  ___\\ /\\__  _\\ /\\__  _\\ /\\  ___\\   /\\  ___\\   /\\ \\_\\ \\" FTTECH_NEWLINE    
+        "\\ \\  __\\ \\/_/\\ \\/ \\/_/\\ \\/ \\ \\  __\\   \\ \\ \\____  \\ \\  __ \\" FTTECH_NEWLINE 
+        " \\ \\_\\      \\ \\_\\    \\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\ \\_\\ \\_\\" FTTECH_NEWLINE
+        "  \\/_/       \\/_/     \\/_/   \\/_____/   \\/_____/   \\/_/\\/_/  v" FTTECH_VERSION
+      ));
+    }
+
   private:
-    bool debug = false;
     uint32_t _R2 = 330000;
     uint32_t _R1 = 1000000;
 
+    /*! 
+    @def Validade if click parameter is within acceptable range
+    @return:
+       0: No problem
+      -1: Parameter out of range
+    */
+    int8_t validadeClick(uint8_t click);
     uint8_t mapToClickPower(uint8_t click);
     uint8_t mapToClickSPI(uint8_t click);
+
+    void initPowerPins(void);
+    void initSPIPins(void);
+    void getChipID(void);
 
     float readBattery(uint8_t BatteryPin);
 

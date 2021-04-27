@@ -1,0 +1,7 @@
+{
+    "configuration": "cache=on",
+    "board": "FTTech:samd:samd51_click",
+    "port": "COM3",
+    "sketch": "..\\..\\ARD_Debugging_PrintProblem_apr23_2021\\ARD_Debugging_PrintProblem_apr23_2021.ino",
+    "output": "../build"
+}
