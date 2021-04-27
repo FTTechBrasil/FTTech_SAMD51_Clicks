@@ -49,9 +49,8 @@ class FTTech_SAMD51_MAX31875 {
     /*!
       @brief This function send configuration setup to MAX sensor according to configReg
     */
-    uint8_t configTemp(void);
+    void configTemp(void);
     
-    uint8_t write(uint8_t var);
 
     uint8_t  checkInitialize(void);
 

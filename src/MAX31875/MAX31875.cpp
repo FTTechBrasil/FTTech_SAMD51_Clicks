@@ -7,16 +7,9 @@
 
 void FTTech_SAMD51_MAX31875::begin(void)
 {
-  uint8_t error = configTemp();
-  if(error)
-  {
-  #if DEBUG_FTTECH_SAMD51 >= 1
-    DEBUG1_FTTECH_PRINTLN(F("Couldn't initialize sensor"));
-  #endif
-  }else
-  {
-    initialized = true;
-  }
+  Wire.begin();
+  configTemp();
+  initialized = true;
 }
 
 
@@ -98,31 +91,14 @@ int FTTech_SAMD51_MAX31875::readRaw(void)
  * Resolution      = b11 -> 12 bit             (Datasheet) Table 6: Resolution Selection
  * All Other values = 0
  */
-uint8_t FTTech_SAMD51_MAX31875::configTemp(void)
+void FTTech_SAMD51_MAX31875::configTemp(void)
 {
   Wire.beginTransmission(maxAddress);
   for(int i=0; i<3; i++)
   {
-    bool error = write(configReg[i]);
-    if(error)
-      return 1;
+    Wire.write(configReg[i]);
   }
   Wire.endTransmission();
-  return 0;
-}
-
-uint8_t FTTech_SAMD51_MAX31875::write(uint8_t var)
-{
-
-  uint8_t error = Wire.write(var);
-  if(error)
-  {
-    #if DEBUG_FTTECH_SAMD51 >= 1
-    DEBUG1_FTTECH_PRINTLN(F("Error when configuring module, check if I2C-Master Pullup jumper is enabled."));
-    #endif
-    return 1;
-  }
-  return 0;
 }
 
 // instantiate static
