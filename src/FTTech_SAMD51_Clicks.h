@@ -17,7 +17,7 @@
 
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-#define FTTECH_VERSION "1.0.0"
+#define FTTECH_VERSION "1.1.0"
 
 class FTTech_SAMD51Clicks {
   public:

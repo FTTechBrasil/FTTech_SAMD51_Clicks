@@ -8,6 +8,8 @@ Currently supports the following hardware:
 
 ## Updates
 
+* 1.1.0 Minor improvements in modularity
+* 1.0.0 First Release
 * 0.8.0 Added [ArduinoModbus](https://github.com/arduino-libraries/ArduinoModbus) with RS485 contructor to RTUClient
 * 0.7.0 Removed XBee and created another lib for it to improve modularity and reduce code complexity.
 * 0.6.0 Improved XBee-Arduino package delivery by adding serial.flush();
