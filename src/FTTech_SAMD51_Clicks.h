@@ -17,7 +17,7 @@
 
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-#define FTTECH_VERSION "1.1.0"
+#define FTTECH_VERSION "1.2.0"
 
 #ifdef __SAMD51G18A__
   #define QNTY_CLICKS 2
