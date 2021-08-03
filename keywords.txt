@@ -30,8 +30,7 @@ turnON_SPI_CS	KEYWORD2
 turnOFF_SPI_CS	KEYWORD2
 sleepForSeconds	KEYWORD2
 sleepWithComunication	KEYWORD2
-readLipoBattery	KEYWORD2
-readLeadAcidBattery	KEYWORD2
+readBattery	KEYWORD2
 readCelsius KEYWORD2
 
 poll	KEYWORD2

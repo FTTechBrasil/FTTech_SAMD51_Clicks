@@ -55,7 +55,7 @@ int FTTech_SAMD51_MAX31875::readRaw(void)
   int tempRaw = 0;
   
   // Point to the temperature register
-  Wire.beginTransmission(maxAddress);
+  Wire.beginTransmission(MAX31875_ADDRESS);
   Wire.write(tempReg[0]);
   Wire.write(tempReg[1]);
   Wire.endTransmission();
@@ -64,7 +64,7 @@ int FTTech_SAMD51_MAX31875::readRaw(void)
   delay(100);
   
   // Request 2bytes from pointed register
-  Wire.requestFrom(maxAddress, 2);
+  Wire.requestFrom(MAX31875_ADDRESS, 2);
   
   // Read temperature reading from sensor
   if (2 <= Wire.available()) {    // if two bytes were received
@@ -93,12 +93,40 @@ int FTTech_SAMD51_MAX31875::readRaw(void)
  */
 void FTTech_SAMD51_MAX31875::configTemp(void)
 {
-  Wire.beginTransmission(maxAddress);
+  Wire.beginTransmission(MAX31875_ADDRESS);
   for(int i=0; i<3; i++)
   {
     Wire.write(configReg[i]);
   }
   Wire.endTransmission();
+}
+
+bool FTTech_SAMD51_MAX31875::init(void)
+{
+  uint16_t configRaw;
+
+  // point to config register
+  Wire.beginTransmission(MAX31875_ADDRESS);
+  for(int i=0; i<2; i++) 
+  {
+    Wire.write(configReg[i]);
+  }
+  Wire.endTransmission();
+
+  // Request 2bytes from pointed register
+  Wire.requestFrom(MAX31875_ADDRESS, 2);
+  
+  // Read POR configuration from sensor
+  if (2 <= Wire.available()) {    // if two bytes were received
+    configRaw = Wire.read();        // receive high byte (overwrites previous reading)
+    configRaw = configRaw << 8;       // shift high byte to be high 8 bits
+    configRaw |= Wire.read();       // receive low byte as lower 8 bits
+  }
+
+  if (configRaw == 0x40)
+    return true;
+  
+  return false;
 }
 
 // instantiate static

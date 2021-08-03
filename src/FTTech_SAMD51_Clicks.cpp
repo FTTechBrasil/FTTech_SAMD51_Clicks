@@ -9,7 +9,7 @@ bool FTTech_SAMD51Clicks::begin()
 
   uint8_t pin = 0;
 
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     pin = mapToClickPower(i);
     pinMode(pin, OUTPUT);
@@ -44,7 +44,7 @@ void FTTech_SAMD51Clicks::turnON(uint8_t click)
 
 void FTTech_SAMD51Clicks::turnON(void)
 {
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     turnON(i);
   }
@@ -60,7 +60,7 @@ void FTTech_SAMD51Clicks::turnOFF(uint8_t click)
 
 void FTTech_SAMD51Clicks::turnOFF(void)
 {
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     turnOFF(i);
   }
@@ -78,7 +78,7 @@ void FTTech_SAMD51Clicks::turnOFF_5V(void)
 
 void FTTech_SAMD51Clicks::turnOFF_SPI(void)
 {
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     turnOFF_SPI(i);
   }
@@ -133,14 +133,12 @@ int FTTech_SAMD51Clicks::sleepWithComunication(int secs, int early_awekening)
   return _sleepMS;
 }
 
-float FTTech_SAMD51Clicks::readLipoBattery(void)
+float FTTech_SAMD51Clicks::readBattery(void)
 {
-  return readBattery(LIPO_BATTERY);
-}
+  float analog = analogRead(BATTERY);
+  float voltage = analog * 3.3 / 1023 * (_R2 + _R1) / (_R2);
 
-float FTTech_SAMD51Clicks::readLeadAcidBattery(void)
-{
-  return readBattery(LEAD_BATTERY);
+  return voltage;
 }
 
 /*****************************************************************
@@ -170,12 +168,14 @@ uint8_t FTTech_SAMD51Clicks::mapToClickPower(uint8_t click)
   case 2:
     pin = CLICK_TWO;
     break;
+#ifndef __SAMD51G18A__ 
   case 3:
     pin = CLICK_THREE;
     break;
   case 4:
     pin = CLICK_FOUR;
     break;
+#endif
   }
   return pin;
 }
@@ -191,29 +191,23 @@ uint8_t FTTech_SAMD51Clicks::mapToClickSPI(uint8_t click)
   case 2:
     pin = SS2;
     break;
+#ifndef __SAMD51G18A__
   case 3:
     pin = SS3;
     break;
   case 4:
     pin = SS4;
     break;
+#endif
   }
   return pin;
-}
-
-float FTTech_SAMD51Clicks::readBattery(uint8_t BatteryPin)
-{
-  float analog = analogRead(BatteryPin);
-  float voltage = analog * 3.3 / 1023 * (_R2 + _R1) / (_R2);
-
-  return voltage;
 }
 
 void FTTech_SAMD51Clicks::initPowerPins(void)
 {
   uint8_t pin = 0;
 
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     pin = mapToClickPower(i);
     pinMode(pin, OUTPUT);
@@ -228,7 +222,7 @@ void FTTech_SAMD51Clicks::initSPIPins(void)
 {
   uint8_t pin = 0;
 
-  for (int i = 1; i < 5; i++)
+  for (int i = 1; i <= QNTY_CLICKS; i++)
   {
     pin = mapToClickSPI(i);
     pinMode(pin, OUTPUT);

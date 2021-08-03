@@ -19,6 +19,12 @@
 
 #define FTTECH_VERSION "1.1.0"
 
+#ifdef __SAMD51G18A__
+  #define QNTY_CLICKS 2
+#else
+  #define QNTY_CLICKS 4
+#endif
+
 class FTTech_SAMD51Clicks {
   public:
 
@@ -103,14 +109,9 @@ class FTTech_SAMD51Clicks {
     int sleepWithComunication(int secs, int early_awekening = 8);
 
     /*!
-      @brief reads lipo battery on LIPO_BATTERY and return current voltage already converted
+      @brief reads battery on BATTERY and return current voltage already converted
     */
-    float readLipoBattery(void);
-
-    /*!
-      @brief reads lead acid battery on LEAD_BATTERY and return current voltage already converted
-    */
-    float readLeadAcidBattery(void);
+    float readBattery(void);
 
 
     void printBanner() {
@@ -140,8 +141,6 @@ class FTTech_SAMD51Clicks {
     void initPowerPins(void);
     void initSPIPins(void);
     void getChipID(void);
-
-    float readBattery(uint8_t BatteryPin);
 
 };
 
