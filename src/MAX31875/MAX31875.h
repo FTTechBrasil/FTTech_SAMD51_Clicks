@@ -5,6 +5,20 @@
 
 #include <Arduino.h>
 
+
+/*!
+ *  @brief  default I2C address
+ */
+#define MAX31875_ADDRESS (0x48)           // Primary I2C Address
+
+/*!
+ *  @brief Register addresses
+ */
+enum {
+  MAX31875_REGISTER_TEMPDATA = 0x00,
+  MAX31875_REGISTER_CONFIG = 0x01
+};
+
 /**************************************************************************/
 /*!
     @brief  Class that stores state and functions for interacting with
@@ -25,20 +39,19 @@ class FTTech_SAMD51_MAX31875 {
     */
     float readCelsius(void);
 
+    bool  init(void);
+
 
   private:
     bool initialized = false;
 
-    // Slave and Register Addresses
-    const uint8_t maxAddress = 0x48;          // (Datasheet) Table 1. I2C Slave Addresses
-    const uint8_t tempRegAddress = 0x00;      // (Datasheet) Table 2. Register Functions and POR States
-    const uint8_t configRegAddress = 0x01;    // (Datasheet) Table 2. Register Functions and POR States
+
 
     // Temperature Register
-    const uint8_t tempReg[2] = {tempRegAddress, 0x00};
+    const uint8_t tempReg[2] = {MAX31875_REGISTER_TEMPDATA, 0x00};
 
     // Configuration Register
-    const uint8_t configReg[3] = {configRegAddress, 0x00, 01100110};
+    const uint8_t configReg[3] = {MAX31875_REGISTER_CONFIG, 0x00, 0x66};
 
 
     /*!
@@ -53,6 +66,8 @@ class FTTech_SAMD51_MAX31875 {
     
 
     uint8_t  checkInitialize(void);
+
+    
 
 };
 
