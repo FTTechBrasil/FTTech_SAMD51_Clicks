@@ -8,6 +8,7 @@ Currently supports the following hardware:
 
 ## Updates
 
+* 1.2.1 Added board flag and examples
 * 1.1.0 Minor improvements in modularity
 * 1.0.0 First Release
 * 0.8.0 Added [ArduinoModbus](https://github.com/arduino-libraries/ArduinoModbus) with RS485 contructor to RTUClient
