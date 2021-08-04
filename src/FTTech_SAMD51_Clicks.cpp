@@ -168,7 +168,7 @@ uint8_t FTTech_SAMD51Clicks::mapToClickPower(uint8_t click)
   case 2:
     pin = CLICK_TWO;
     break;
-#ifndef __SAMD51G18A__ 
+#ifndef __FTTECH_SMARTNODE_1S__ 
   case 3:
     pin = CLICK_THREE;
     break;
@@ -191,7 +191,7 @@ uint8_t FTTech_SAMD51Clicks::mapToClickSPI(uint8_t click)
   case 2:
     pin = SS2;
     break;
-#ifndef __SAMD51G18A__
+#ifndef __FTTECH_SMARTNODE_1S__
   case 3:
     pin = SS3;
     break;
