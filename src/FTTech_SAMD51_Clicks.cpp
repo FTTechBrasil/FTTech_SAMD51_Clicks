@@ -121,9 +121,9 @@ int FTTech_SAMD51Clicks::sleepWithComunication(int secs, int early_awekening)
   {
     secs += -(_await + _await);
     _sleepMS += sleepForSeconds(_await);
-    FTClicks.turnOFF(4);
+    FTClicks.turnOFF(CLICK_20PIN);
     _sleepMS += sleepForSeconds(secs);
-    FTClicks.turnON(4);
+    FTClicks.turnON(CLICK_20PIN);
     _sleepMS += sleepForSeconds(_await);
   }
   else
