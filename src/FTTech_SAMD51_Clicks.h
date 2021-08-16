@@ -21,8 +21,10 @@
 
 #ifdef __FTTECH_SMARTNODE_1S__
   #define QNTY_CLICKS 2
+  #define CLICK_20PIN 2
 #else
   #define QNTY_CLICKS 4
+  #define CLICK_20PIN 4
 #endif
 
 #define AVERAGING_SAMPLES_1    0
