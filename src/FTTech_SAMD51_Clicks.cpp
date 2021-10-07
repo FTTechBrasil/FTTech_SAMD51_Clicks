@@ -205,9 +205,6 @@ uint8_t FTTech_SAMD51Clicks::mapToClickSPI(uint8_t click)
   case 3:
     pin = SS3;
     break;
-  case 4:
-    pin = SS4;
-    break;
 #endif
   }
   return pin;
