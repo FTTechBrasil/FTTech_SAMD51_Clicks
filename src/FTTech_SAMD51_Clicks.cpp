@@ -201,7 +201,7 @@ uint8_t FTTech_SAMD51Clicks::mapToClickSPI(uint8_t click)
 #ifdef __FTTECH_SMARTNODE_3S__
   case 3:
     pin = SS3;
-    break; 
+    break;
 #endif
   }
   return pin;
