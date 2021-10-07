@@ -4,6 +4,8 @@ Arduino's IDE Library to make our SAMD51 easier to use. Improved usability with 
 
 Currently supports the following hardware:
 
+*  FTTech Smartnode 1S Old Version (Soon will be deprecated)
+*  FTTech SmartNode Swarm
 *  FTTech SmartNode 1S
 *  FTTech SmartNode 3S
 
