@@ -11,5 +11,7 @@ Currently supports the following hardware:
 - [Adafruit SleepyDog Arduino Library](https://github.com/adafruit/Adafruit_SleepyDog)
 
 ## License
-
 The MIT License (MIT)
+
+## Version
+1.3.2
