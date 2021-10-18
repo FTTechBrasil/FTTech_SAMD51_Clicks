@@ -4,8 +4,10 @@ Arduino's IDE Library to make our SAMD51 easier to use. Improved usability with 
 
 Currently supports the following hardware:
 
+*  FTTech SmartNode 1S Old Versions
 *  FTTech SmartNode 1S
 *  FTTech SmartNode 3S
+*  FTTech SmartNode Swarm
 
 ## Dependencies
 - [Adafruit SleepyDog Arduino Library](https://github.com/adafruit/Adafruit_SleepyDog)
@@ -14,4 +16,4 @@ Currently supports the following hardware:
 The MIT License (MIT)
 
 ## Version
-1.3.2
+1.3.3
