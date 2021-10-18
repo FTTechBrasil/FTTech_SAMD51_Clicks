@@ -16,8 +16,4 @@ Currently supports the following hardware:
 The MIT License (MIT)
 
 ## Version
-<<<<<<< Updated upstream
-1.3.2
-=======
 1.3.4
->>>>>>> Stashed changes
