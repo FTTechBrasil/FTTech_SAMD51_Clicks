@@ -17,7 +17,7 @@
 
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-#define FTTECH_VERSION "1.3.3"
+#define FTTECH_VERSION "1.3.4"
 
 #ifdef __FTTECH_SMARTNODE_3S__
   #define QNTY_CLICKS 4
