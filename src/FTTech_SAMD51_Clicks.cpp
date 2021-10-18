@@ -78,7 +78,7 @@ void FTTech_SAMD51Clicks::turnOFF_5V(void)
 
 void FTTech_SAMD51Clicks::turnOFF_SPI(void)
 {
-  for (int i = 1; i <= QNTY_CLICKS; i++)
+  for (int i = 1; i <= QNTY_CLICKS-1; i++)
   {
     turnOFF_SPI(i);
   }
@@ -86,7 +86,7 @@ void FTTech_SAMD51Clicks::turnOFF_SPI(void)
 
 void FTTech_SAMD51Clicks::turnOFF_SPI(uint8_t click)
 {
-  if (validadeClick(click) == 0) {
+  if (validadeClick(click, QNTY_CLICKS-1) == 0) {
     uint8_t pin = mapToClickSPI(click);
     digitalWrite(pin, HIGH);
   }
@@ -94,7 +94,7 @@ void FTTech_SAMD51Clicks::turnOFF_SPI(uint8_t click)
 
 void FTTech_SAMD51Clicks::turnON_SPI(uint8_t click)
 {
-  if (validadeClick(click) == 0) {
+  if (validadeClick(click, QNTY_CLICKS-1) == 0) {
     uint8_t pin = mapToClickSPI(click);
     digitalWrite(pin, LOW);
   }
@@ -154,11 +154,11 @@ float FTTech_SAMD51Clicks::readCPUTemperature(uint8_t averege)
 /*****************************************************************
  * PRIVATE FUNCTIONS
  ****************************************************************/
-int8_t FTTech_SAMD51Clicks::validadeClick(uint8_t click)
+int8_t FTTech_SAMD51Clicks::validadeClick(uint8_t click, uint8_t max_clicks)
 {
-  if (click < 1 || click > 4) {
+  if (click < 1 || click > max_clicks) {
     #if DEBUG_FTTECH_SAMD51 >= 1
-      DEBUG2_FTTECH_PRINTLN(F("Click number has to be between 1 and 4. Received: "), click);
+      DEBUG2_FTTECH_PRINTLN(F("Click number has to be between 1 and QNTY_CLICKS. Received: "), click);
 	  #endif
     return -1;
   }else{
@@ -178,12 +178,9 @@ uint8_t FTTech_SAMD51Clicks::mapToClickPower(uint8_t click)
   case 2:
     pin = CLICK_TWO;
     break;
-#ifndef __FTTECH_SMARTNODE_1S__ 
+#ifdef __FTTECH_SMARTNODE_3S__ 
   case 3:
     pin = CLICK_THREE;
-    break;
-  case 4:
-    pin = CLICK_FOUR;
     break;
 #endif
   }
@@ -201,7 +198,7 @@ uint8_t FTTech_SAMD51Clicks::mapToClickSPI(uint8_t click)
   case 2:
     pin = SS2;
     break;
-#ifndef __FTTECH_SMARTNODE_1S__
+#ifdef __FTTECH_SMARTNODE_3S__
   case 3:
     pin = SS3;
     break;

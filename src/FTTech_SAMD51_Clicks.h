@@ -163,7 +163,7 @@ class FTTech_SAMD51Clicks {
        0: No problem
       -1: Parameter out of range
     */
-    int8_t validadeClick(uint8_t click);
+    int8_t validadeClick(uint8_t click, uint8_t max_clicks = QNTY_CLICKS);
     uint8_t mapToClickPower(uint8_t click);
     uint8_t mapToClickSPI(uint8_t click);
 
