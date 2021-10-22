@@ -31,6 +31,16 @@ bool FTTech_SAMD51Clicks::begin()
       DEBUG2_FTTECH_PRINTLN(F("Unique ID: "), this->ChipID);
   #endif
 
+  pinMode(EXTERN_LED_PIN, OUTPUT);
+  digitalWrite(EXTERN_LED_PIN, LOW);
+
+  for (int i = 0; i < 5; i++){
+    delay(200);
+    digitalWrite(EXTERN_LED_PIN, HIGH);
+    delay(200);
+    digitalWrite(EXTERN_LED_PIN, LOW);
+  }
+
   return true;
 }
 
