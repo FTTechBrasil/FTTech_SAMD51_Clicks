@@ -34,13 +34,12 @@ bool FTTech_SAMD51Clicks::begin()
   pinMode(EXTERN_LED_PIN, OUTPUT);
   digitalWrite(EXTERN_LED_PIN, LOW);
 
-  for (int i = 0; i < 5; i++){
-    delay(200);
-    digitalWrite(EXTERN_LED_PIN, HIGH);
-    delay(200);
-    digitalWrite(EXTERN_LED_PIN, LOW);
+  for (int i = 0; i < 10; i++){
+    delay(100);
+    digitalWrite(EXTERN_LED_PIN, !digitalRead(EXTERN_LED_PIN));
   }
-
+  
+  digitalWrite(EXTERN_LED_PIN, LOW);
   return true;
 }
 
@@ -131,9 +130,9 @@ int FTTech_SAMD51Clicks::sleepWithComunication(int secs, int early_awekening)
   {
     secs += -(_await + _await);
     _sleepMS += sleepForSeconds(_await);
-    FTClicks.turnOFF(4);
+    FTClicks.turnOFF(_COMMCLICK);
     _sleepMS += sleepForSeconds(secs);
-    FTClicks.turnON(4);
+    FTClicks.turnON(_COMMCLICK);
     _sleepMS += sleepForSeconds(_await);
   }
   else

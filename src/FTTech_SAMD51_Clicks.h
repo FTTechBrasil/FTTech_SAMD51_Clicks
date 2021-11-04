@@ -17,25 +17,22 @@
 
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-<<<<<<< Updated upstream
-#define FTTECH_VERSION "1.2.0"
-
-#ifdef __SAMD51G18A__
-  #define QNTY_CLICKS 2
-#else
-  #define QNTY_CLICKS 4
-=======
 #define FTTECH_VERSION "1.3.5"
 
 #ifdef __FTTECH_SMARTNODE_3S__
   #define QNTY_CLICKS 4
   #define CLICK_20PIN 4
   #define EXTERN_LED_PIN 13
+  #define _COMMCLICK 4
 #else
   #define QNTY_CLICKS 2
   #define CLICK_20PIN 2
   #define EXTERN_LED_PIN 12
->>>>>>> Stashed changes
+  #define _COMMCLICK 2
+#endif
+
+#ifdef __FTTECH_SMARTNODE_1S__
+  #define EXTERN_LED_PIN 8
 #endif
 
 class FTTech_SAMD51Clicks {
