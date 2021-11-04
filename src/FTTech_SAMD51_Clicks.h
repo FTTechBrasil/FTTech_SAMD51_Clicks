@@ -23,17 +23,35 @@
   #define QNTY_CLICKS 4
   #define CLICK_20PIN 4
   #define EXTERN_LED_PIN 13
-  #define _COMMCLICK 4
 #else
   #define QNTY_CLICKS 2
   #define CLICK_20PIN 2
-  #define EXTERN_LED_PIN 12
-  #define _COMMCLICK 2
-#endif
-
-#ifdef __FTTECH_SMARTNODE_1S__
   #define EXTERN_LED_PIN 8
 #endif
+
+#define AVERAGING_SAMPLES_1    0
+#define AVERAGING_SAMPLES_2    1
+#define AVERAGING_SAMPLES_4    2
+#define AVERAGING_SAMPLES_8    3
+#define AVERAGING_SAMPLES_16   4
+#define AVERAGING_SAMPLES_32   5
+#define AVERAGING_SAMPLES_64   6
+#define AVERAGING_SAMPLES_128  7
+#define AVERAGING_SAMPLES_256  8
+#define AVERAGING_SAMPLES_512  9
+#define AVERAGING_SAMPLES_1024 10
+
+#define DEFAULT_AVERAGING_SAMPLES AVERAGING_SAMPLES_1
+/**
+  Datasheet Page 58, in the 9.5 NVM Software Calibration Area Mapping:
+  "The NVM Software Calibration Area for temperature calibration parameters can not be written.
+  The NVM Software Calibration Area for temperature calibration parameters can be read at address 0x00800100"
+
+  In the path: `C:\Users\myUserName\AppData\Local\Arduino15\packages\adafruit\tools\CMSIS-Atmel\1.2.1\CMSIS\Device\ATMEL\samd51\include\samd51j20a.h`
+  we can find the `NVMCTRL_TEMP_LOG_W0` defined as mentioned: 0x00800100. 
+*/
+#define NVMCTRL_TEMP_LOG NVMCTRL_TEMP_LOG_W0
+
 
 class FTTech_SAMD51Clicks {
   public:
@@ -123,6 +141,9 @@ class FTTech_SAMD51Clicks {
     */
     float readBattery(void);
 
+    float readCPUTemperature(void);
+    float readCPUTemperature(uint8_t averege);
+
 
     void printBanner() {
       LOG1_FTTECH_PRINTLN(F(
@@ -144,13 +165,17 @@ class FTTech_SAMD51Clicks {
        0: No problem
       -1: Parameter out of range
     */
-    int8_t validadeClick(uint8_t click);
+    int8_t validadeClick(uint8_t click, uint8_t max_clicks = QNTY_CLICKS);
     uint8_t mapToClickPower(uint8_t click);
     uint8_t mapToClickSPI(uint8_t click);
 
     void initPowerPins(void);
     void initSPIPins(void);
     void getChipID(void);
+
+    float convertDecToFrac(uint8_t val);
+    float calculateTemperature(uint16_t TP, uint16_t TC);
+    float getTempc(uint8_t averaging);
 
 };
 
