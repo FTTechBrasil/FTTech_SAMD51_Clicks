@@ -17,17 +17,7 @@
 
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-#define FTTECH_VERSION "1.3.5"
-
-#ifdef __FTTECH_SMARTNODE_3S__
-  #define QNTY_CLICKS 4
-  #define CLICK_20PIN 4
-  #define EXTERN_LED_PIN 13
-#else
-  #define QNTY_CLICKS 2
-  #define CLICK_20PIN 2
-  #define EXTERN_LED_PIN 8
-#endif
+#define FTTECH_VERSION "1.3.6"
 
 #define AVERAGING_SAMPLES_1    0
 #define AVERAGING_SAMPLES_2    1
