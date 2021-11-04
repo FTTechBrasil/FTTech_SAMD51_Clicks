@@ -26,7 +26,7 @@
 #else
   #define QNTY_CLICKS 2
   #define CLICK_20PIN 2
-  #define EXTERN_LED_PIN 12
+  #define EXTERN_LED_PIN 8
 #endif
 
 #define AVERAGING_SAMPLES_1    0
