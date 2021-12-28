@@ -15,9 +15,17 @@
 */
 /**************************************************************************/
 
+// Retrocompability with 3S old versions
+#ifndef QNTY_CLICKS
+  #define QNTY_CLICKS 4
+  #define BATTERY A8
+  #define EXTERN_LED_PIN 13
+  #define CLICK_20PIN 4
+#endif
+
 #define SIZE_OF_ARRAY(arr)                      { sizeof(arr)/sizeof(arr[0]); }
 
-#define FTTECH_VERSION "1.3.6"
+#define FTTECH_VERSION "1.3.7"
 
 #define AVERAGING_SAMPLES_1    0
 #define AVERAGING_SAMPLES_2    1
