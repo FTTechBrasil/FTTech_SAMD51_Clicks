@@ -16,6 +16,7 @@
 /**************************************************************************/
 
 // Retrocompability with 3S old versions
+
 #ifndef QNTY_CLICKS
   #define QNTY_CLICKS 4
   #define BATTERY A8

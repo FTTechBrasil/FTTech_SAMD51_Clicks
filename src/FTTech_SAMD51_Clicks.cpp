@@ -4,12 +4,12 @@
  * PUBLIC FUNCTIONS
 *****************************************************************/
 
-bool FTTech_SAMD51Clicks::begin()
+bool FTTech_SAMD51Clicks::begin(void)
 {
 
   uint8_t pin = 0;
 
-  for (int i = 1; i <= QNTY_CLICKS; i++)
+  for (uint8_t i = 1; i <= QNTY_CLICKS; i++)
   {
     pin = mapToClickPower(i);
     pinMode(pin, OUTPUT);
@@ -34,12 +34,11 @@ bool FTTech_SAMD51Clicks::begin()
   pinMode(EXTERN_LED_PIN, OUTPUT);
   digitalWrite(EXTERN_LED_PIN, LOW);
 
-  for (int i = 0; i < 10; i++){
-    delay(100);
+  for (uint8_t j = 0; j < 10; j++){
     digitalWrite(EXTERN_LED_PIN, !digitalRead(EXTERN_LED_PIN));
+    delay(100);
   }
-  
-  digitalWrite(EXTERN_LED_PIN, LOW);
+
   return true;
 }
 
