@@ -1,0 +1,41 @@
+# Lint da FTTech SAMD51 Clicks: estrutura da biblioteca, library.properties,
+# exemplos e regras do Arduino Library Manager. Formatação (clang-format) só avisa.
+name: Lint
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  arduino-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: arduino/arduino-lint-action@v3
+        with:
+          project-type: library
+          # A biblioteca já está registrada no Library Manager.
+          library-manager: update
+          # "specification" passa hoje (só 1 aviso: espaço no name=, que não dá para mudar
+          # sem quebrar o registro). "strict" transformaria esse aviso em erro.
+          compliance: specification
+
+  # Formatação: só AVISA (não bloqueia), porque o código atual não segue um .clang-format.
+  # Para tornar obrigatório depois de formatar o repo inteiro, troque por: clang-format --dry-run --Werror $FILES
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: clang-format (aviso)
+        run: |
+          [ -f .clang-format ] || printf 'BasedOnStyle: Google\nIndentWidth: 2\nColumnLimit: 120\n' > .clang-format
+          FILES=$(git ls-files '*.c' '*.cpp' '*.h' '*.ino')
+          [ -z "$FILES" ] && exit 0
+          N=$(clang-format --dry-run $FILES 2>&1 | grep -c 'warning:' || true)
+          if [ "$N" -gt 0 ]; then echo "::warning::clang-format: $N trechos fora do padrão (não bloqueia o PR)"; fi
