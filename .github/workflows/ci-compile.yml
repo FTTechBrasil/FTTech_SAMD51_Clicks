@@ -1,0 +1,65 @@
+# Compila todos os exemplos da FTTech SAMD51 Clicks em todas as placas SAMD51 da FT Tech.
+# Roda em cada PR, em push na master e manualmente (aba Actions).
+name: Compilar exemplos
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FTTECH_INDEX: https://raw.githubusercontent.com/FTTechBrasil/CustomBoardsPublic/master/IndexFiles/package_fttech_index.json
+
+jobs:
+  compile:
+    name: ${{ matrix.board.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # A biblioteca é architectures=samd: o SmartNode 1S S3 (ESP32-S3) fica de fora.
+        board:
+          - name: SmartNode 3S V9
+            fqbn: FTTech:samd:fttech_smartnode_3s:version=v9
+          - name: SmartNode 3S V8
+            fqbn: FTTech:samd:fttech_smartnode_3s:version=v8
+          - name: SmartNode 1S V1
+            fqbn: FTTech:samd:fttech_smartnode_1s:version=v1
+          - name: SmartNode 1S V0
+            fqbn: FTTech:samd:fttech_smartnode_1s:version=v0
+          - name: SmartNode Swarm
+            fqbn: FTTech:samd:fttech_smartnode_1s:version=swarm
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: ${{ matrix.board.fqbn }}
+          platforms: |
+            - name: FTTech:samd
+              source-url: ${{ env.FTTECH_INDEX }}
+              version: 3.0.1
+          # source-path ./ = a biblioteca deste PR (não a publicada no Library Manager).
+          # Adafruit SleepyDog vem do depends= do library.properties;
+          # DHT sensor library + Adafruit Unified Sensor são usadas só pelo exemplo DHT22.
+          libraries: |
+            - source-path: ./
+            - name: Adafruit SleepyDog Library
+            - name: DHT sensor library
+            - name: Adafruit Unified Sensor
+          sketch-paths: |
+            - examples
+          enable-warnings-report: true
+          enable-deltas-report: true
+          sketches-report-path: sketches-reports
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sketches-report-${{ strategy.job-index }}
+          path: sketches-reports
