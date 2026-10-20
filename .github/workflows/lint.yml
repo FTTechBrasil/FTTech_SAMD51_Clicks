@@ -27,10 +27,9 @@ jobs:
           compliance: specification
 
   # Formatação: só AVISA (não bloqueia), porque o código atual não segue um .clang-format.
-  # Para tornar obrigatório depois de formatar o repo inteiro, remova "continue-on-error".
+  # Para tornar obrigatório depois de formatar o repo inteiro, troque por: clang-format --dry-run --Werror $FILES
   formatting:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
       - name: clang-format (aviso)
@@ -38,4 +37,5 @@ jobs:
           [ -f .clang-format ] || printf 'BasedOnStyle: Google\nIndentWidth: 2\nColumnLimit: 120\n' > .clang-format
           FILES=$(git ls-files '*.c' '*.cpp' '*.h' '*.ino')
           [ -z "$FILES" ] && exit 0
-          clang-format --dry-run --Werror $FILES
+          N=$(clang-format --dry-run $FILES 2>&1 | grep -c 'warning:' || true)
+          if [ "$N" -gt 0 ]; then echo "::warning::clang-format: $N trechos fora do padrão (não bloqueia o PR)"; fi
